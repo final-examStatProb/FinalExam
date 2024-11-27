@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Concepts</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="members.html">Members</a></li>
+            </ul>
+        </nav>
+        <h1>Mathematical Concepts</h1>
+    </header>
+    <main>
+        <section id="central-tendency">
+            <h2>Measures of Central Tendency (Ungrouped Data)</h2>
+            <p>
+                Measures of central tendency describe a central value for a set of data. The three main measures are:
+            </p>
+            <ul>
+                <li><strong>Mean:</strong> The average of a dataset, calculated by dividing the sum of all values by the number of values.</li>
+                <li><strong>Median:</strong> The middle value when the data is ordered from smallest to largest.</li>
+                <li><strong>Mode:</strong> The value(s) that appear most frequently in the dataset.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <p>Consider the dataset: 4, 8, 6, 5, 3.</p>
+            <ul>
+                <li><strong>Mean:</strong> (4 + 8 + 6 + 5 + 3) / 5 = 26 / 5 = 5.2.</li>
+                <li><strong>Median:</strong> 5 (middle value when the dataset is ordered: 3, 4, 5, 6, 8).</li>
+                <li><strong>Mode:</strong> No mode (all values appear only once).</li>
+            </ul>
+            <canvas id="centralTendencyChart" width="400" height="200"></canvas>
+        </section>
+        <section id="fundamental-counting">
+            <h2>Fundamental Counting Principle</h2>
+            <p>
+                The Fundamental Counting Principle states that if one event can occur in \(m\) ways and a second event can occur independently in \(n\) ways, then the total number of ways the two events can occur is \(m \times n\).
+            </p>
+            <p>
+                This principle is used to calculate the total number of outcomes in a sequence of events.
+            </p>
+            <p><strong>Example:</strong></p>
+            <p>
+                If you have 3 shirts (red, blue, green) and 2 pants (black, white), the total number of outfits is:
+            </p>
+            <p>
+                Total outfits = 3 × 2 = 6.
+            </p>
+            <p>
+                The possible outfits are:
+                <ul>
+                    <li>Red shirt with black pants</li>
+                    <li>Red shirt with white pants</li>
+                    <li>Blue shirt with black pants</li>
+                    <li>Blue shirt with white pants</li>
+                    <li>Green shirt with black pants</li>
+                    <li>Green shirt with white pants</li>
+                </ul>
+            </p>
+            <canvas id="fundamentalCountingChart" width="400" height="200"></canvas>
+        </section>
+    </main>
+   
+    <script>
+        // Central Tendency Chart
+        const centralTendencyCtx = document.getElementById('centralTendencyChart').getContext('2d');
+        new Chart(centralTendencyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['4', '8', '6', '5', '3'],
+                datasets: [{
+                    label: 'Dataset Values',
+                    data: [4, 8, 6, 5, 3],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                return label + ': ' + context.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Fundamental Counting Principle Chart
+        const fundamentalCountingCtx = document.getElementById('fundamentalCountingChart').getContext('2d');
+        new Chart(fundamentalCountingCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Red-Black', 'Red-White', 'Blue-Black', 'Blue-White', 'Green-Black', 'Green-White'],
+                datasets: [{
+                    label: 'Outfit Combinations',
+                    data: [1, 1, 1, 1, 1, 1],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
